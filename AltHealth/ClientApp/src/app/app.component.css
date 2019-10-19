@@ -1,0 +1,10 @@
+@media (max-width: 1000px) {
+  /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+  .body-content {
+    padding-top: 60px;
+  }
+  #toast-container > div {
+    opacity:1;
+}
+
+}

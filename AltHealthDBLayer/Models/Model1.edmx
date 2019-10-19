@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AltHealthDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClientData">
+          <Key>
+            <PropertyRef Name="Client_id" />
+          </Key>
+          <Property Name="Client_id" Type="float" Nullable="false" />
+          <Property Name="C_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="C_surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Code" Type="int" />
+          <Property Name="C_Tel_H" Type="nvarchar" MaxLength="50" />
+          <Property Name="C_Tel_W" Type="nvarchar" MaxLength="50" />
+          <Property Name="C_Tel_Cell" Type="nvarchar" MaxLength="50" />
+          <Property Name="C_Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="C_Reference" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InvoiceInfo">
+          <Key>
+            <PropertyRef Name="InvID" />
+          </Key>
+          <Property Name="InvID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INVNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="INVDate" Type="datetime2" Precision="7" />
+          <Property Name="Client_id" Type="float" />
+          <Property Name="Consultation" Type="money" />
+          <Property Name="TotalSupplements" Type="money" />
+          <Property Name="TotalSupplConsultation" Type="money" />
+        </EntityType>
+        <EntityType Name="InvoiceItems">
+          <Key>
+            <PropertyRef Name="InvItemID" />
+          </Key>
+          <Property Name="InvItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvID" Type="int" />
+          <Property Name="Suppl_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Suppl_Info">
+          <Key>
+            <PropertyRef Name="Supplier_id" />
+          </Key>
+          <Property Name="Supplier_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contact_Person" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cell" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bank" Type="nvarchar" MaxLength="50" />
+          <Property Name="Branch_Code" Type="int" />
+          <Property Name="Account_Number" Type="float" />
+          <Property Name="Type_of_Account" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Supplements">
+          <Key>
+            <PropertyRef Name="Suppl_id" />
+          </Key>
+          <Property Name="Suppl_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cost_excl" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Cost_incl" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Perc_inc" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Cost_client" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Supplier_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Min_levels" Type="int" Nullable="false" />
+          <Property Name="Stock_levels" Type="int" Nullable="false" />
+          <Property Name="Nappi_code" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_InvoiceInfo_ClientData">
+          <End Role="ClientData" Type="Self.ClientData" Multiplicity="0..1" />
+          <End Role="InvoiceInfo" Type="Self.InvoiceInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientData">
+              <PropertyRef Name="Client_id" />
+            </Principal>
+            <Dependent Role="InvoiceInfo">
+              <PropertyRef Name="Client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceItems_InvoiceInfo">
+          <End Role="InvoiceInfo" Type="Self.InvoiceInfo" Multiplicity="0..1" />
+          <End Role="InvoiceItems" Type="Self.InvoiceItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceInfo">
+              <PropertyRef Name="InvID" />
+            </Principal>
+            <Dependent Role="InvoiceItems">
+              <PropertyRef Name="InvID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceItems_Supplements">
+          <End Role="Supplements" Type="Self.Supplements" Multiplicity="0..1" />
+          <End Role="InvoiceItems" Type="Self.InvoiceItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplements">
+              <PropertyRef Name="Suppl_id" />
+            </Principal>
+            <Dependent Role="InvoiceItems">
+              <PropertyRef Name="Suppl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplements_Suppl_Info">
+          <End Role="Suppl_Info" Type="Self.Suppl_Info" Multiplicity="0..1" />
+          <End Role="Supplements" Type="Self.Supplements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppl_Info">
+              <PropertyRef Name="Supplier_id" />
+            </Principal>
+            <Dependent Role="Supplements">
+              <PropertyRef Name="Supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AltHealthDBModel1StoreContainer">
+          <EntitySet Name="ClientData" EntityType="Self.ClientData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceInfo" EntityType="Self.InvoiceInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceItems" EntityType="Self.InvoiceItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppl_Info" EntityType="Self.Suppl_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplements" EntityType="Self.Supplements" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_InvoiceInfo_ClientData" Association="Self.FK_InvoiceInfo_ClientData">
+            <End Role="ClientData" EntitySet="ClientData" />
+            <End Role="InvoiceInfo" EntitySet="InvoiceInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceItems_InvoiceInfo" Association="Self.FK_InvoiceItems_InvoiceInfo">
+            <End Role="InvoiceInfo" EntitySet="InvoiceInfo" />
+            <End Role="InvoiceItems" EntitySet="InvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceItems_Supplements" Association="Self.FK_InvoiceItems_Supplements">
+            <End Role="Supplements" EntitySet="Supplements" />
+            <End Role="InvoiceItems" EntitySet="InvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplements_Suppl_Info" Association="Self.FK_Supplements_Suppl_Info">
+            <End Role="Suppl_Info" EntitySet="Suppl_Info" />
+            <End Role="Supplements" EntitySet="Supplements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AltHealthDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClientData">
+          <Key>
+            <PropertyRef Name="Client_id" />
+          </Key>
+          <Property Name="Client_id" Type="Double" Nullable="false" />
+          <Property Name="C_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="Int32" />
+          <Property Name="C_Tel_H" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Tel_W" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Tel_Cell" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InvoiceInfo" Relationship="Self.FK_InvoiceInfo_ClientData" FromRole="ClientData" ToRole="InvoiceInfo" />
+        </EntityType>
+        <EntityType Name="InvoiceInfo">
+          <Key>
+            <PropertyRef Name="InvID" />
+          </Key>
+          <Property Name="InvID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INVNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="INVDate" Type="DateTime" Precision="7" />
+          <Property Name="Client_id" Type="Double" />
+          <Property Name="Consultation" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalSupplements" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalSupplConsultation" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="ClientData" Relationship="Self.FK_InvoiceInfo_ClientData" FromRole="InvoiceInfo" ToRole="ClientData" />
+          <NavigationProperty Name="InvoiceItems" Relationship="Self.FK_InvoiceItems_InvoiceInfo" FromRole="InvoiceInfo" ToRole="InvoiceItems" />
+        </EntityType>
+        <EntityType Name="InvoiceItem">
+          <Key>
+            <PropertyRef Name="InvItemID" />
+          </Key>
+          <Property Name="InvItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvID" Type="Int32" />
+          <Property Name="Suppl_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="InvoiceInfo" Relationship="Self.FK_InvoiceItems_InvoiceInfo" FromRole="InvoiceItems" ToRole="InvoiceInfo" />
+          <NavigationProperty Name="Supplement" Relationship="Self.FK_InvoiceItems_Supplements" FromRole="InvoiceItems" ToRole="Supplements" />
+        </EntityType>
+        <EntityType Name="Suppl_Info">
+          <Key>
+            <PropertyRef Name="Supplier_id" />
+          </Key>
+          <Property Name="Supplier_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contact_Person" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cell" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Branch_Code" Type="Int32" />
+          <Property Name="Account_Number" Type="Double" />
+          <Property Name="Type_of_Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Supplements" Relationship="Self.FK_Supplements_Suppl_Info" FromRole="Suppl_Info" ToRole="Supplements" />
+        </EntityType>
+        <EntityType Name="Supplement">
+          <Key>
+            <PropertyRef Name="Suppl_id" />
+          </Key>
+          <Property Name="Suppl_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cost_excl" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Cost_incl" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Perc_inc" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Cost_client" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Supplier_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Min_levels" Type="Int32" Nullable="false" />
+          <Property Name="Stock_levels" Type="Int32" Nullable="false" />
+          <Property Name="Nappi_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InvoiceItems" Relationship="Self.FK_InvoiceItems_Supplements" FromRole="Supplements" ToRole="InvoiceItems" />
+          <NavigationProperty Name="Suppl_Info" Relationship="Self.FK_Supplements_Suppl_Info" FromRole="Supplements" ToRole="Suppl_Info" />
+        </EntityType>
+        <Association Name="FK_InvoiceInfo_ClientData">
+          <End Role="ClientData" Type="Self.ClientData" Multiplicity="0..1" />
+          <End Role="InvoiceInfo" Type="Self.InvoiceInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientData">
+              <PropertyRef Name="Client_id" />
+            </Principal>
+            <Dependent Role="InvoiceInfo">
+              <PropertyRef Name="Client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceItems_InvoiceInfo">
+          <End Role="InvoiceInfo" Type="Self.InvoiceInfo" Multiplicity="0..1" />
+          <End Role="InvoiceItems" Type="Self.InvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceInfo">
+              <PropertyRef Name="InvID" />
+            </Principal>
+            <Dependent Role="InvoiceItems">
+              <PropertyRef Name="InvID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceItems_Supplements">
+          <End Role="Supplements" Type="Self.Supplement" Multiplicity="0..1" />
+          <End Role="InvoiceItems" Type="Self.InvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplements">
+              <PropertyRef Name="Suppl_id" />
+            </Principal>
+            <Dependent Role="InvoiceItems">
+              <PropertyRef Name="Suppl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplements_Suppl_Info">
+          <End Role="Suppl_Info" Type="Self.Suppl_Info" Multiplicity="0..1" />
+          <End Role="Supplements" Type="Self.Supplement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppl_Info">
+              <PropertyRef Name="Supplier_id" />
+            </Principal>
+            <Dependent Role="Supplements">
+              <PropertyRef Name="Supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AltHealthDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClientDatas" EntityType="Self.ClientData" />
+          <EntitySet Name="InvoiceInfoes" EntityType="Self.InvoiceInfo" />
+          <EntitySet Name="InvoiceItems" EntityType="Self.InvoiceItem" />
+          <EntitySet Name="Suppl_Info" EntityType="Self.Suppl_Info" />
+          <EntitySet Name="Supplements" EntityType="Self.Supplement" />
+          <AssociationSet Name="FK_InvoiceInfo_ClientData" Association="Self.FK_InvoiceInfo_ClientData">
+            <End Role="ClientData" EntitySet="ClientDatas" />
+            <End Role="InvoiceInfo" EntitySet="InvoiceInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceItems_InvoiceInfo" Association="Self.FK_InvoiceItems_InvoiceInfo">
+            <End Role="InvoiceInfo" EntitySet="InvoiceInfoes" />
+            <End Role="InvoiceItems" EntitySet="InvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceItems_Supplements" Association="Self.FK_InvoiceItems_Supplements">
+            <End Role="Supplements" EntitySet="Supplements" />
+            <End Role="InvoiceItems" EntitySet="InvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplements_Suppl_Info" Association="Self.FK_Supplements_Suppl_Info">
+            <End Role="Suppl_Info" EntitySet="Suppl_Info" />
+            <End Role="Supplements" EntitySet="Supplements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AltHealthDBModel1StoreContainer" CdmEntityContainer="AltHealthDBEntities1">
+          <EntitySetMapping Name="ClientDatas">
+            <EntityTypeMapping TypeName="AltHealthDBModel1.ClientData">
+              <MappingFragment StoreEntitySet="ClientData">
+                <ScalarProperty Name="Client_id" ColumnName="Client_id" />
+                <ScalarProperty Name="C_name" ColumnName="C_name" />
+                <ScalarProperty Name="C_surname" ColumnName="C_surname" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="C_Tel_H" ColumnName="C_Tel_H" />
+                <ScalarProperty Name="C_Tel_W" ColumnName="C_Tel_W" />
+                <ScalarProperty Name="C_Tel_Cell" ColumnName="C_Tel_Cell" />
+                <ScalarProperty Name="C_Email" ColumnName="C_Email" />
+                <ScalarProperty Name="C_Reference" ColumnName="C_Reference" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceInfoes">
+            <EntityTypeMapping TypeName="AltHealthDBModel1.InvoiceInfo">
+              <MappingFragment StoreEntitySet="InvoiceInfo">
+                <ScalarProperty Name="InvID" ColumnName="InvID" />
+                <ScalarProperty Name="INVNum" ColumnName="INVNum" />
+                <ScalarProperty Name="INVDate" ColumnName="INVDate" />
+                <ScalarProperty Name="Client_id" ColumnName="Client_id" />
+                <ScalarProperty Name="Consultation" ColumnName="Consultation" />
+                <ScalarProperty Name="TotalSupplements" ColumnName="TotalSupplements" />
+                <ScalarProperty Name="TotalSupplConsultation" ColumnName="TotalSupplConsultation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceItems">
+            <EntityTypeMapping TypeName="AltHealthDBModel1.InvoiceItem">
+              <MappingFragment StoreEntitySet="InvoiceItems">
+                <ScalarProperty Name="InvItemID" ColumnName="InvItemID" />
+                <ScalarProperty Name="InvID" ColumnName="InvID" />
+                <ScalarProperty Name="Suppl_id" ColumnName="Suppl_id" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppl_Info">
+            <EntityTypeMapping TypeName="AltHealthDBModel1.Suppl_Info">
+              <MappingFragment StoreEntitySet="Suppl_Info">
+                <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+                <ScalarProperty Name="Contact_Person" ColumnName="Contact_Person" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Cell" ColumnName="Cell" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="Branch_Code" ColumnName="Branch_Code" />
+                <ScalarProperty Name="Account_Number" ColumnName="Account_Number" />
+                <ScalarProperty Name="Type_of_Account" ColumnName="Type_of_Account" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplements">
+            <EntityTypeMapping TypeName="AltHealthDBModel1.Supplement">
+              <MappingFragment StoreEntitySet="Supplements">
+                <ScalarProperty Name="Suppl_id" ColumnName="Suppl_id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Cost_excl" ColumnName="Cost_excl" />
+                <ScalarProperty Name="Cost_incl" ColumnName="Cost_incl" />
+                <ScalarProperty Name="Perc_inc" ColumnName="Perc_inc" />
+                <ScalarProperty Name="Cost_client" ColumnName="Cost_client" />
+                <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+                <ScalarProperty Name="Min_levels" ColumnName="Min_levels" />
+                <ScalarProperty Name="Stock_levels" ColumnName="Stock_levels" />
+                <ScalarProperty Name="Nappi_code" ColumnName="Nappi_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

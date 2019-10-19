@@ -1,0 +1,123 @@
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <input type="hidden" name="Id" [value]="formData.Id">
+
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-white">
+                <i class="fas fa-barcode" [class.green-icon]="Client_id.vaild" [class.red-icon]="Client_id.invalid && Client_id.touched"></i>
+              </div>
+            </div>
+            <input name="Client_id" #Client_id="ngModel" [(ngModel)]="formData.Client_id" placeholder="Client_id" required class="group-control">
+          </div>
+        </div>
+      
+        <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                  <i class="fas fa-book" [class.green-icon]="C_name.vaild" [class.red-icon]="C_name.invalid && C_name.touched"></i>
+                </div>
+              </div>
+              <input name="C_name" #C_name="ngModel" [(ngModel)]="formData.C_name" class="form-control" placeholder="C_name" required class="group-control">
+            </div>
+          </div>
+      
+          <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text bg-white">
+                    <i class="fas fa-comment-dots" [class.green-icon]="C_surname.vaild" [class.red-icon]="C_surname.invalid && C_surname.touched"></i>
+                  </div>
+                </div>
+                <input name="C_surname" #C_surname="ngModel" [(ngModel)]="formData.C_surname" placeholder="C_surname" required class="group-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text bg-white">
+                      <i class="fas fa-comment-dots" [class.green-icon]="Address.vaild" [class.red-icon]="Address.invalid && Address.touched"></i>
+                    </div>
+                  </div>
+                  <input name="Address" #Address="ngModel" [(ngModel)]="formData.Address" placeholder="Address" required class="group-control">
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text bg-white">
+                        <i class="fas fa-comment-dots" [class.green-icon]="Code.vaild" [class.red-icon]="Code.invalid && Code.touched"></i>
+                      </div>
+                    </div>
+                    <input name="Code" #Code="ngModel" [(ngModel)]="formData.Code" placeholder="Code" required class="group-control">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                          <i class="fas fa-comment-dots" [class.green-icon]="C_Tel_H.vaild" [class.red-icon]="C_Tel_H.invalid && C_Tel_H.touched"></i>
+                        </div>
+                      </div>
+                      <input name="C_Tel_H" #C_Tel_H="ngModel" [(ngModel)]="formData.C_Tel_H" placeholder="C_Tel_H" required class="group-control">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text bg-white">
+                            <i class="fas fa-comment-dots" [class.green-icon]="C_Tel_W.vaild" [class.red-icon]="C_Tel_W.invalid && C_Tel_W.touched"></i>
+                          </div>
+                        </div>
+                        <input name="C_Tel_W" #C_Tel_W="ngModel" [(ngModel)]="formData.C_Tel_W" placeholder="C_Tel_W" required class="group-control">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                              <i class="fas fa-comment-dots" [class.green-icon]="C_Tel_Cell.vaild" [class.red-icon]="C_Tel_Cell.invalid && C_Tel_Cell.touched"></i>
+                            </div>
+                          </div>
+                          <input name="C_Tel_Cell" #C_Tel_Cell="ngModel" [(ngModel)]="formData.C_Tel_Cell" placeholder="C_Tel_Cell" required class="group-control">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text bg-white">
+                                <i class="fas fa-comment-dots" [class.green-icon]="C_Email.vaild" [class.red-icon]="C_Email.invalid && C_Email.touched"></i>
+                              </div>
+                            </div>
+                            <input name="C_Email" #C_Email="ngModel" [(ngModel)]="formData.C_Email" placeholder="C_Email" required class="group-control">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text bg-white">
+                                  <i class="fas fa-comment-dots" [class.green-icon]="C_Reference.vaild" [class.red-icon]="C_Reference.invalid && C_Reference.touched"></i>
+                                </div>
+                              </div>
+                              <input name="C_Reference" #C_Reference="ngModel" [(ngModel)]="formData.C_Reference" placeholder="C_Reference" required class="group-control">
+                            </div>
+                          </div>
+
+
+            <div class="form-group">
+                    <button class="btn btn-success " type="submit" [disabled]="form.invalid">
+                      <i class="fas fa-database"></i>
+                    Submit</button>
+                    <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i>Close</button>
+                  </div>
+                 
+      </form>
+      

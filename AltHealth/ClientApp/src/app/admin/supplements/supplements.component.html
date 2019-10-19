@@ -1,0 +1,54 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand text-white">Admin</a>
+  <button class="btn btn-danger my-z my-sm-0" (click)="onLogout()">Logout</button>
+  
+</nav>
+<h1>Supplements List</h1>
+
+<button style="float: left !important;" (click)="onCreate(null,service.formData.Suppl_id)"  type="submit" class="btn btn-success"> Add Supplement</button>
+<br>
+<br>
+<div class="form-group col-md-6">
+    <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="search"> 
+</div>
+<br>
+<body>
+  <table class="table table-hover">
+      <thead>
+          <tr>
+            <th>Suppl_id</th>
+            <th>Description</th>
+            <th>Cost_excl</th>
+            <th>Cost_incl</th>
+            <th>Perc_inc</th>
+            <th>Cost_client</th>
+            <th>Supplier_id</th>
+            <th>Min_levels</th>
+            <th>Stock_levels</th>
+            <th>Nappi_code</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr *ngFor= "let SupplementList of service.list| filter: filter | paginate: { itemsPerPage: 5, currentPage: p }; let i=index;">
+        
+        <td>{{SupplementList.Suppl_id}}</td>
+        <td>{{SupplementList.Description}}</td>
+        <td>{{SupplementList.Cost_excl}}</td>
+        <td>{{SupplementList.Cost_incl}}</td>
+        <td>{{SupplementList.Perc_inc}}</td>
+        <td>{{SupplementList.Cost_client}}</td>
+        <td>{{SupplementList.Supplier_id}}</td>
+        <td>{{SupplementList.Min_levels}}</td>
+        <td>{{SupplementList.Stock_levels}}</td>
+        <td>{{SupplementList.Nappi_code}}</td>
+        <td>
+          <a class="btn btn-sm btn-info text-white" (click)="onCreate(i,service.formData.Suppl_id)"><i class="fas fa-pen-square"></i></a>
+        </td>
+        <td>
+            <a class="btn btn-sm btn-info text-white" (click)="Delete(null,service.formData.Suppl_id)"><i class="far fa-trash-alt"></i></a>
+          </td>
+      </tr>
+        </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</body>

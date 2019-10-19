@@ -1,0 +1,62 @@
+<h4 class="display-4">Order Supplements</h4>
+<hr>
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+    <input type="hidden" name="InvID" #InvID="ngModel" [(ngModel)]="formData.InvID">
+    <input type="hidden" name="InvItemID" #InvItemID="ngModel" [(ngModel)]="formData.InvItemID">
+    <input type="hidden" name="Suppl_id" #Suppl_id="ngModel" [(ngModel)]="formData.Suppl_id">
+    <div class="form-group">
+        <label>Select Supplement:</label>
+       <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-barcode" [class.green-icon]="Suppl_id.vaild" [class.red-icon]="Suppl_id.invalid && Suppl_id.touched"></i>
+                </div>
+            </div>
+            <select name="Suppl_id" #Suppl_id="ngModel" [(ngModel)]="formData.Suppl_id" placeholder="Supplement" required (change)="updatePrice($event.target)">
+                <option value="0">-Select-</option>
+                <option *ngFor="let supplitem of itemList" value="{{supplitem.Suppl_id}}">{{supplitem.Suppl_id}}</option>
+            </select>
+        </div>      
+    </div>
+
+    <div class="form-group">
+            <div class="input-group">
+                 <div class="input-group-prepend">
+                     <div class="input-group-text bg-white">
+                         <i class="fas fa-barcode" [class.green-icon]="Price.vaild" [class.red-icon]="Price.invalid && Price.touched"></i>
+                     </div>
+                 </div>
+                 <input name="Price" #Price="ngModel" [(ngModel)]="formData.Price" placeholder="Price" required class="group-control">
+             </div>      
+         </div>
+         
+         <div class="form-group">
+                <div class="input-group">
+                     <div class="input-group-prepend">
+                         <div class="input-group-text bg-white">
+                             <i class="fas fa-barcode" [class.green-icon]="Quantity.vaild" [class.red-icon]="Quantity.invalid && Quantity.touched"></i>
+                         </div>
+                     </div>
+                     <input name="Quantity" #Quantity="ngModel" [(ngModel)]="formData.Quantity" placeholder="Quantity" required class="group-control"
+                     (keyup)="updateTotal()">
+                 </div>      
+             </div>
+
+             <div class="form-group">
+                    <div class="input-group">
+                         <div class="input-group-prepend">
+                             <div class="input-group-text bg-white">
+                                 <i class="fas fa-barcode" [class.green-icon]="Total.vaild" [class.red-icon]="Total.invalid && Total.touched"></i>
+                             </div>
+                         </div>
+                         <input name="Total" #Total="ngModel" [(ngModel)]="formData.Total" placeholder="Total" required class="group-control">
+                     </div>      
+                 </div> 
+                 <div class="form-group">
+                        <button class="btn btn-success " type="submit" [disabled]="form.invalid">
+                          <i class="fas fa-database"></i>
+                        Submit</button>
+                        <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i>Close</button>
+                      </div>
+
+</form>

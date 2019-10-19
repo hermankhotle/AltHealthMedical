@@ -1,0 +1,36 @@
+<div class="main-nav">
+  
+  <div class='navbar navbar-inverse border-bottom box-shadow mb-3'>
+      <div class="logo-img">
+          <img src="/assets/althealth15.png" />
+        </div>
+          <a class='navbar-brand' [routerLink]='["/home"]'>AltHealth</a>
+          
+      </div>
+  <ul>
+      <li class="nav-item" [routerLinkActive]='["link-active"]'>
+          <a class="nav-link text-dark" [routerLink]='["/signin"]'><i class="fas fa-user"></i> Login</a>
+        </li>
+      <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+      <a class="nav-link text-dark" [routerLink]='["/home"]'><i class="fas fa-home"></i> Home</a>
+    </li>
+    <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+      <a class="nav-link text-dark" [routerLink]='["/dashboard"]'><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    </li>
+      <li class="nav-item" [routerLinkActive]='["link-active"]'>
+          <a class="nav-link text-dark" [routerLink]='["/clients"]'><i class="fas fa-wheelchair"></i> clients</a>
+        </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/supplements"]'><i class="fas fa-pills"></i> Supplements</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+              <a class="nav-link text-dark" [routerLink]='["/bookings-info"]'><i class="fas fa-clipboard-list"></i> Bookings Info</a>
+            </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+              <a class="nav-link text-dark" [routerLink]='["/appointments"]'><i class="fas fa-calendar-check"></i>Appointments</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]='["link-active"]'>
+                <a class="nav-link text-dark" [routerLink]='["/invoice-info"]'><i class="fas fa-credit-card"></i> Invoices</a>
+              </li>
+  </ul>
+</div>

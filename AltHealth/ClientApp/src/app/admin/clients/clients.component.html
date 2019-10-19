@@ -1,0 +1,55 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand text-white">Admin</a>
+    <button class="btn btn-danger my-z my-sm-0" (click)="onLogout()">Logout</button>
+    
+  </nav>
+  <h1>Clients</h1>
+  <button style="float: left !important;" (click)="onCreateOrEdit(null,service.formData.Id)"  type="submit" class="btn btn-success"> Add Client</button>
+  <br>
+<br>
+<div class="form-group col-md-6">
+    <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="search"> 
+</div>
+<br>
+  <body>
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                <th>Client Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Code</th>
+                <th>Tell (Home)</th>
+                <th>Tell (Work)</th>
+                <th>Tell (Cell)</th>
+                <th>Email</th>
+                <th>Reference</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+          <tr *ngFor= "let ClientList of service.list | filter: filter | paginate: { itemsPerPage: 5, currentPage: p }; let i=index">
+            
+            <td>{{ClientList.Client_id}}</td>
+            <td>{{ClientList.C_name}}</td>
+            <td>{{ClientList.C_surname}}</td>
+            <td>{{ClientList.Address}}</td>
+            <td>{{ClientList.Code}}</td>
+            <td>{{ClientList.C_Tel_H}}</td>
+            <td>{{ClientList.C_Tel_W}}</td>
+            <td>{{ClientList.C_Tel_Cell}}</td>
+            <td>{{ClientList.C_Email}}</td>
+            <td>{{ClientList.C_Reference}}</td>
+            <td>
+              <a class="btn btn-sm btn-info text-white" (click)="onCreateOrEdit(i,service.formData.ID)"><i class="fas fa-pen-square"></i></a>
+            </td>
+            <td>
+                <a class="btn btn-sm btn-info text-white" (click)="Delete(null,service.formData.Id)"><i class="far fa-trash-alt"></i></a>
+              </td>
+          </tr>
+            </tbody>
+            
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </body>

@@ -1,0 +1,88 @@
+<form #form='ngForm' class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
+  <div class="wrapper">
+      <div class="wrapped-div">
+        <div class="tab-header">
+          <a routerLink='/signin' routerLinkActive='active'>Sign In</a>
+          <a routerLink='/signup' routerLinkActive='active'>Sign Up</a>
+        </div>
+        <div class="row">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+      </div> 
+      <div>
+          <img src="/assets/alth.png" />
+      </div>
+<div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text bg-white">
+            <i class="fas fa-user" [class.green-icon]="UserName.vaild" [class.red-icon]="UserName.invalid && UserName.touched"></i>
+          </div>
+        </div>
+        <input name="UserName" #UserName="ngModel" [(ngModel)]="service.formData.UserName" class="form-control" placeholder="User Name" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text bg-white">
+              <i class="fas fa-file-signature" [class.green-icon]="FullName.vaild" [class.red-icon]="FullName.invalid && FullName.touched"></i>
+            </div>
+          </div>
+          <input name="FullName" #FullName="ngModel" [(ngModel)]="service.formData.FullName" class="form-control" placeholder="Full Name" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-white">
+                <i class="fas fa-at" [class.green-icon]="Email.vaild" [class.red-icon]="Email.invalid && Email.touched"></i>
+              </div>
+            </div>
+            <input name="Email" #Email="ngModel" [(ngModel)]="service.formData.Email" class="form-control" placeholder="Email" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                  <i class="fas fa-mobile-alt" [class.green-icon]="PhoneNumber.vaild" [class.red-icon]="PhoneNumber.invalid && PhoneNumber.touched"></i>
+                </div>
+              </div>
+              <input name="PhoneNumber" #PhoneNumber="ngModel" [(ngModel)]="service.formData.PhoneNumber" class="form-control" placeholder="Phone Number" required>
+            </div>
+          </div>
+        
+          <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text bg-white">
+                    <i class="fas fa-key" [class.green-icon]="Password.vaild" [class.red-icon]="Password.invalid && Password.touched"></i>
+                  </div>
+                </div>
+                <input name="Password" #Password="ngModel" [(ngModel)]="service.formData.Password" class="form-control" placeholder="Password" required>
+              </div>
+            </div>
+
+            <!-- <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text bg-white">
+                      <i class="fas fa-book" [class.green-icon]="ConfirmPassword.vaild" [class.red-icon]="ConfirmPassword.invalid && ConfirmPassword.touched"></i>
+                    </div>
+                  </div>
+                  <input name="ConfirmPassword" #ConfirmPassword="ngModel" [(ngModel)]="service.formData.ConfirmPassword" class="form-control" placeholder="ConfirmPassword" required>
+                </div>
+              </div> -->
+
+
+            <div class="form-group">
+                <button class="btn btn-success btn-lg btn-block" type="submit" [disabled]="form.invalid">
+                  <i class="fas fa-database"></i>
+                Sign Up</button>
+                </div>
+</form>

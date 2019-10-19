@@ -1,0 +1,117 @@
+<div class="jumbotron jumbotron-fluid">
+    <h3 class="display-4 text-center"></h3>
+    <h3 class="display-4 text-center"><img src="assets/althsmall.png">Alt Health App</h3>
+</div>
+  <div class="container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <h5 class="display-4 text-center">Please do bookings here:</h5>
+            <hr>
+            <form #form="ngForm" autocomplete="off"  >
+                <!-- <input type="hidden" name="ID" [value]="service.formData.ID"> -->
+  
+                <!-- <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                          <div class="input-group-text bg-white">
+                              <i class="fas fa-barcode" [class.green-icon]="INVNum.vaild" [class.red-icon]="INVNum.invalid && INVNum.touched"></i>
+                            </div>
+                      </div>
+                      <input name="INVNum" #INVNum="ngModel" [(ngModel)]="service.formData.INVNum" placeholder="Invoice number" required class="form-control">
+                    </div>
+                  </div> -->
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                          <i class="fas fa-barcode" [class.green-icon]="Client_id.vaild" [class.red-icon]="Client_id.invalid && Client_id.touched"></i>
+                        </div>
+                      </div>
+                      <select name="Client_id" #Client_id="ngModel" [(ngModel)]="service.formData.Client_id" placeholder="Client ID" class="form-control">
+                    <option value="0">-Select Client ID-</option>
+                      </select>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text bg-white">
+                            <i class="fas fa-barcode" [class.green-icon]="INVDate.vaild" [class.red-icon]="INVDate.invalid && INVDate.touched"></i>
+                          </div>
+                        </div>
+                        <input name="INVDate" type="date" #INVDate="ngModel" [(ngModel)]="service.formData.INVDate"  required class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                              <i class="fas fa-barcode" [class.green-icon]="INVDate.vaild" [class.red-icon]="INVDate.invalid && INVDate.touched"></i>
+                            </div>
+                          </div>
+                          <input name="INVDate" type="time" #INVDate="ngModel" [(ngModel)]="service.formData.INVDate"  required class="form-control">
+                          </div>
+                      </div>
+                  <!-- <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text bg-white">
+                            <i class="fas fa-barcode" [class.green-icon]="Consultation.vaild" [class.red-icon]="Consultation.invalid && Consultation.touched"></i>
+                          </div>
+                        </div>
+                        <input name="Consultation" type="number" #Consultation="ngModel" [(ngModel)]="service.formData.Consultation" placeholder="Consultation" required class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text bg-white">
+                            <i class="fas fa-barcode" [class.green-icon]="TotalSupplements.vaild" [class.red-icon]="TotalSupplements.invalid && TotalSupplements.touched"></i>
+                          </div>
+                        </div>
+                        <input name="TotalSupplements" type="number" #TotalSupplements="ngModel" [(ngModel)]="service.formData.TotalSupplements" placeholder="Total Supplements" required class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text bg-white">
+                            <i class="fas fa-barcode" [class.green-icon]="TotalSupplConsultaion.vaild" [class.red-icon]="TotalSupplConsultaion.invalid && TotalSupplConsultaion.touched"></i>
+                          </div>
+                        </div>
+                        <input name="TotalSupplConsultaion" type="number" #TotalSupplConsultaion="ngModel" [(ngModel)]="service.formData.TotalSupplConsultaion" placeholder="Total" required class="form-control" readonly>
+                        </div>
+                    </div> -->
+  
+                    <table class="table table-borderless">
+                      <thead class="thead-light">
+                        <th>Client_id</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>
+                          <a class="btn btn-sm btn-success text-white" (click)="AddOrEditInvItems(null,service.formData.InvID)"><i class="fa fa-plus"></i>Add Item</a>
+                        </th>
+                      </thead>
+                      <tr *ngIf="service.invItems.length==0">
+                        <td class="font-italic text-center" colspan="5">
+                          No bookings made
+                        </td>
+                      </tr>
+                      <tbody>
+                        <tr *ngFor="let item of service.invItems; let i=index;">
+                          <td>{{item.Client_id}}</td>
+                          <td>{{item.Date}}</td>
+                          <td>{{item.Time}}</td>
+                          <td>
+                              <a class="btn btn-sm btn-info text-white" (click)="AddOrEditInvItems(i,service.formData.InvID)"><i class="fa fa-pencil"></i></a>
+                              <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteInvItems(item.invItems,i,service.formData.InvID)"><i class="fa fa-pencil"></i></a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+          </form>
+        </div>
+      </div>
+    </div>

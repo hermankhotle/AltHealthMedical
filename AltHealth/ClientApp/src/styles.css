@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~ngx-toastr/toastr.css';
+.jumbotron {
+    padding-top: 0px;
+    background: #fff;
+}
+
+.form-control, .input-group-text {
+    border: 1px solid #0080ff;
+    width: 20px;
+}
+
+table.table-hover tbody tr:hover {
+    cursor: pointer;
+}
+input.ng-touched.ng-invalid{
+    border-color: red;
+}
+
+input.ng-valid{
+    border-color: green;
+}
+
+.green-icon {
+    color: green;
+}
+
+.red-icon {
+    color: red;
+}
+
+#toast-container > div {
+    opacity:1;
+}
+
+/* form {
+    margin: 0px 250px;
+} */
+
+input.form-group, input.form-group :focus{
+    border-width: 20px;
+}
+
+div.form-group {
+    border-width: 50px;
+}

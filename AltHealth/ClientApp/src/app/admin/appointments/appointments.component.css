@@ -1,0 +1,5 @@
+
+input.form-group, input.form-group :focus{
+    border-width: 500px;
+    margin-right: 500%;;
+}

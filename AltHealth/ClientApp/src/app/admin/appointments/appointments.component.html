@@ -1,0 +1,35 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand text-white">Admin</a>
+  <div class="input-group-prepend">
+  <input class="form-control" type="text" name="search" [(ngModel)]="filter"> 
+  </div>
+  <button class="btn btn-danger my-z my-sm-0" (click)="onLogout()">Logout</button>
+  
+</nav>
+<h3>Appointments List</h3>
+<button style="float: left !important;" (click)="onCreate()"  type="submit" class="btn btn-success"> Add Appointment</button>
+
+<body>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+              <th>Appointment Date</th>
+              <th>Client ID</th>
+              <th>Time</th>
+          </thead>
+          <tbody>
+        <tr *ngFor= "let AppointmentList of service.list | filter:filter;">
+          
+          <td>{{AppointmentList.Appointment_Date}}</td>
+          <td>{{AppointmentList.Client_id}}</td>
+          <td>{{AppointmentList.Time}}</td>
+          <td>
+            <a class="btn btn-sm btn-info text-white" (click)="Edit(null,service.formData.ID)"><i class="fas fa-pen-square"></i></a>
+          </td>
+          <td>
+              <a class="btn btn-sm btn-info text-white" (click)="Delete(null,service.formData.ID)"><i class="far fa-trash-alt"></i></a>
+            </td>
+        </tr>
+          </tbody>
+      </table>
+  </body>

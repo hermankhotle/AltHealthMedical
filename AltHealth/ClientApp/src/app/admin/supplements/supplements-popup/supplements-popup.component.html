@@ -1,0 +1,121 @@
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <input type="hidden" name="Suppl_id" [value]="formData.Suppl_id">
+
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-white">
+                <i class="fas fa-barcode" [class.green-icon]="Suppl_id.vaild" [class.red-icon]="Suppl_id.invalid && Suppl_id.touched"></i>
+              </div>
+            </div>
+            <input name="Suppl_id" #Suppl_id="ngModel" [(ngModel)]="formData.Suppl_id" placeholder="Suppl_id" required class="group-control">
+          </div>
+        </div>
+          <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text bg-white">
+                    <i class="fas fa-comment-dots" [class.green-icon]="Description.vaild" [class.red-icon]="Description.invalid && Description.touched"></i>
+                  </div>
+                </div>
+                <input name="Description" #Description="ngModel" [(ngModel)]="formData.Description" placeholder="Description" required class="group-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text bg-white">
+                      <i class="fas fa-comment-dots" [class.green-icon]="Cost_excl.vaild" [class.red-icon]="Cost_excl.invalid && Cost_excl.touched"></i>
+                    </div>
+                  </div>
+                  <input name="Cost_excl" #Cost_excl="ngModel" [(ngModel)]="formData.Cost_excl" placeholder="Cost excluding" required class="group-control">
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text bg-white">
+                        <i class="fas fa-comment-dots" [class.green-icon]="Cost_incl.vaild" [class.red-icon]="Cost_incl.invalid && Cost_incl.touched"></i>
+                      </div>
+                    </div>
+                    <input name="Cost_incl" #Cost_incl="ngModel" [(ngModel)]="formData.Cost_incl" placeholder="Cost including" required class="group-control">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                          <i class="fas fa-comment-dots" [class.green-icon]="Perc_inc.vaild" [class.red-icon]="Perc_inc.invalid && Perc_inc.touched"></i>
+                        </div>
+                      </div>
+                      <input name="Perc_inc" #Perc_inc="ngModel" [(ngModel)]="formData.Perc_inc" placeholder="Per included" required class="group-control">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text bg-white">
+                            <i class="fas fa-comment-dots" [class.green-icon]="Cost_client.vaild" [class.red-icon]="Cost_client.invalid && Cost_client.touched"></i>
+                          </div>
+                        </div>
+                        <input name="Cost_client" #Cost_client="ngModel" [(ngModel)]="formData.Cost_client" placeholder="Cost" required class="group-control">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                              <i class="fas fa-comment-dots" [class.green-icon]="Supplier_id.vaild" [class.red-icon]="Supplier_id.invalid && Supplier_id.touched"></i>
+                            </div>
+                          </div>
+                          <input name="Supplier_id" #Supplier_id="ngModel" [(ngModel)]="formData.Supplier_id" placeholder="Supplier ID" required class="group-control">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text bg-white">
+                                <i class="fas fa-comment-dots" [class.green-icon]="Min_levels.vaild" [class.red-icon]="Min_levels.invalid && Min_levels.touched"></i>
+                              </div>
+                            </div>
+                            <input name="Min_levels" #Min_levels="ngModel" [(ngModel)]="formData.Min_levels" placeholder="Min levels" required class="group-control">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text bg-white">
+                                  <i class="fas fa-comment-dots" [class.green-icon]="Stock_levels.vaild" [class.red-icon]="Stock_levels.invalid && Stock_levels.touched"></i>
+                                </div>
+                              </div>
+                              <input name="Stock_levels" #Stock_levels="ngModel" [(ngModel)]="formData.Stock_levels" placeholder="Stock levels" required class="group-control">
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text bg-white">
+                                    <i class="fas fa-comment-dots" [class.green-icon]="Nappi_code.vaild" [class.red-icon]="Nappi_code.invalid && Nappi_code.touched"></i>
+                                  </div>
+                                </div>
+                                <input name="Nappi_code" #Nappi_code="ngModel" [(ngModel)]="formData.Nappi_code" placeholder="Nappi Code" required class="group-control">
+                              </div>
+                            </div>
+
+            <div class="form-group">
+                    <button class="btn btn-success " type="submit" [disabled]="form.invalid">
+                      <i class="fas fa-database"></i>
+                    Submit</button>
+                    <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i>Close</button>
+                  </div>
+                 
+      </form>
+      
